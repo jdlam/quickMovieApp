@@ -1,5 +1,13 @@
 <ul>
   <% @movies.each do |movie| %>
-    <li><a href="/movies/<%= movie.id %>"><%= movie.title %></a> <%= movie.year %> is a <%= movie.movie_type %>! Rated <%= movie.rating %> star(s)</li>
+    <li>
+      <% i=0 %>
+      <h3><a href="/movies/<%= movie.id %>"><%= movie.title %></a> (<%= movie.year %>)</h3>
+      <ul>
+        <li><% while i<movie.rating %><img class="star" src="/images/star.png" alt="Star!" /><% i += 1 %><% end %></li>
+        <li>"<%= movie.comment %>"</li>
+        <li><a href="/movies/<%= movie.id %>/edit">Edit?</a></li>
+      </ul>
+    </li>
   <% end %>
 </ul>

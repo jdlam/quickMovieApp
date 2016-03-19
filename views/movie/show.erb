@@ -4,7 +4,8 @@
 
 <img src="<%= @movie.posterURL %>" alt="<%= @title %>" />
 
-<% unless @alternatives == 0 %>
-  <h4>There were <%= @alternatives %> other potential matches</h4>
-  <h4>Maybe try searching again?</h4>
-<% end %>
+<h4><%= @movie.rating %> stars out of 5</h4>
+
+<p>
+  <%= @movie.comment %>
+</p>

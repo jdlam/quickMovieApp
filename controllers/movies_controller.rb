@@ -4,6 +4,8 @@ class MoviesController < ApplicationController
   require 'json'
   require 'byebug'
 
+  # Search
+
   get '/fetch' do
     unless params[:title].blank? || (!params[:type].blank? && params[:type] != 'movie' &&  params[:type] != 'series' &&  params[:type] != 'episode')
       fetchData
@@ -13,20 +15,42 @@ class MoviesController < ApplicationController
     erb :'movie/search'
   end
 
+  # Show all
+
+  get '/' do
+    @movies = Movie.all.order("id ASC")
+    erb :'movie/index'
+  end
+
+  # Create a review
+
   post '/' do
     Movie.create(params[:movie])
     redirect '/movies'
   end
 
-  get '/' do
-    @movies = Movie.all
-    erb :'movie/index'
-  end
+  # Find a review
 
   get '/:id' do
     @movie = Movie.find(params[:id])
     erb :'movie/show'
   end
+
+  # Edit a review
+
+  get '/:id/edit' do
+    @movie = Movie.find(params[:id])
+    erb :'movie/edit'
+  end
+
+  #  Update a review
+
+  put '/:id' do
+    Movie.find(params[:id]).update(params[:movie])
+    redirect '/movies'
+  end
+
+  # Delete a review
 
   delete '/:id' do
     Movie.find(params[:id]).delete
@@ -45,13 +69,16 @@ class MoviesController < ApplicationController
     end
     res = JSON.parse( RestClient.get 'www.omdbapi.com/', { params: obj} )
 
-    @title = res["Search"][0]["Title"]
-    @year = res["Search"][0]["Year"]
-    @imdbID = res["Search"][0]["imdbID"]
-    @type = res["Search"][0]["Type"]
-    @posterURL = res["Search"][0]["Poster"]
-    @alternatives = res["totalResults"].to_i - 1
-    # byebug
+    if res["Response"] == "False"
+      redirect '/'
+    else
+      @title = res["Search"][0]["Title"]
+      @year = res["Search"][0]["Year"]
+      @imdbID = res["Search"][0]["imdbID"]
+      @type = res["Search"][0]["Type"]
+      @posterURL = res["Search"][0]["Poster"]
+      @alternatives = res["totalResults"].to_i - 1
+    end
   end
 
 end

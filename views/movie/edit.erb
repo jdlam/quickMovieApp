@@ -1,0 +1,18 @@
+<h1><%= @movie.title %></h1>
+
+<h3><%= @movie.year %></h3>
+
+<img src="<%= @movie.posterURL %>" alt="<%= @movie.title %>" />
+
+<form class="" action="/movies/<%= @movie.id %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  Rating (between 1 and 5)
+  <input type="number" name="movie[rating]" min="1" max="5" value="<%= @movie.rating %>">
+  <input id="comment" type="text" name="movie[comment]" value="<%= @movie.comment %>">
+  <input type="submit" value="Save your review!">
+</form>
+
+<form class="" action="/movies/<%= @movie.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete this review">
+</form>
