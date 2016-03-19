@@ -32,15 +32,23 @@ class MoviesController < ApplicationController
   # Find a review
 
   get '/:id' do
-    @movie = Movie.find(params[:id])
-    erb :'movie/show'
+    if Movie.find(params[:id]).nil?
+      redirect '/movies'
+    else
+      @movie = Movie.find(params[:id])
+      erb :'movie/show'
+    end
   end
 
   # Edit a review
 
   get '/:id/edit' do
-    @movie = Movie.find(params[:id])
-    erb :'movie/edit'
+    if Movie.find(params[:id]).nil?
+      redirect '/movies'
+    else
+      @movie = Movie.find(params[:id])
+      erb :'movie/edit'
+    end
   end
 
   #  Update a review
@@ -53,7 +61,9 @@ class MoviesController < ApplicationController
   # Delete a review
 
   delete '/:id' do
-    Movie.find(params[:id]).delete
+    unless Movie.find(params[:id]).nil?
+      Movie.find(params[:id]).delete
+    end
     redirect '/movies'
   end
 
