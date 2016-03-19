@@ -1,0 +1,10 @@
+<h1><%= @movie.title %></h1>
+
+<h3><%= @movie.year %></h3>
+
+<img src="<%= @movie.posterURL %>" alt="<%= @title %>" />
+
+<% unless @alternatives == 0 %>
+  <h4>There were <%= @alternatives %> other potential matches</h4>
+  <h4>Maybe try searching again?</h4>
+<% end %>

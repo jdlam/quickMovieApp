@@ -1,0 +1,21 @@
+<h1><%= @title %></h1>
+
+<h3><%= @year %></h3>
+
+<img src="<%= @posterURL %>" alt="<%= @title %>" />
+
+<% unless @alternatives == 0 %>
+  <h4>There were <%= @alternatives %> other potential matches</h4>
+  <h4>Maybe try searching again?</h4>
+<% end %>
+
+<form class="" action="/movies/" method="post">
+  <input id="title" type="text" name="movie[title]" value="<%= @title %>" hidden>
+  <input id="year" type="text" name="movie[year]" value="<%= @year %>" hidden>
+  <input id="type" type="text" name="movie[movie_type]" value="<%= @type %>" hidden>
+  <input id="posterURL" type="text" name="movie[posterURL]" value="<%= @posterURL %>" hidden>
+  Rating (between 1 and 5)
+  <input type="number" name="movie[rating]" min="1" max="5">
+  <input id="comment" type="text" name="movie[comment]" value="<%= @type %>">
+  <input type="submit" value="Save your review!">
+</form>

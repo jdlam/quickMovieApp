@@ -1,0 +1,11 @@
+development:
+  adapter: postgresql
+  database: quickMovieAppDB
+
+test:
+  adapter: postgresql
+  database: quickMovieAppDB
+
+production:
+  adapter: postgresql
+  database: quickMovieAppDB

@@ -1,4 +1,4 @@
-class MovieApiController < ApplicationController
+class MoviesApiController < ApplicationController
 
   require 'rest-client'
   require 'json'
@@ -10,7 +10,12 @@ class MovieApiController < ApplicationController
     else
       redirect '/'
     end
-    erb :'movie/index'
+    erb :'movie/search'
+  end
+
+  post '/' do
+    Movie.create(params[:movie])
+    redirect '/movies'
   end
 
   private
@@ -24,14 +29,14 @@ class MovieApiController < ApplicationController
       obj.merge!(type: params[:type])
     end
     res = JSON.parse( RestClient.get 'www.omdbapi.com/', { params: obj} )
-    # byebug
+
     @title = res["Search"][0]["Title"]
     @year = res["Search"][0]["Year"]
     @imdbID = res["Search"][0]["imdbID"]
     @type = res["Search"][0]["Type"]
     @posterURL = res["Search"][0]["Poster"]
     @alternatives = res["totalResults"].to_i - 1
-    byebug
+    # byebug
   end
 
 end
