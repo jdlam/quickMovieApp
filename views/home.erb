@@ -1,5 +1,5 @@
 <form id="searchMovie" class="" action="./movies/fetch" method="get">
-  <input id="title" type="text" name="title" value="" placeholder="Title">
+  <input id="title" type="text" name="title" value="" placeholder="Title" required>
   <input id="year" type="text" name="year" value="" placeholder="Year">
   <select id="type" class="" name="type">
     <option value="">Anything</option>
@@ -7,7 +7,7 @@
     <option value="series">Series</option>
     <option value="episode">Episode</option>
   </select>
-  <input type="submit" value="Search!">
+  <input type="submit" value="Search!" disabled>
 </form>
 
 <script src="/js/forms.js" charset="utf-8"></script>

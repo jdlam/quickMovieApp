@@ -4,8 +4,11 @@
 
 <img src="<%= @posterURL %>" alt="<%= @title %>" />
 
-<% unless @alternatives == 0 %>
+<% if @alternatives > 1 %>
   <h4>There were <%= @alternatives %> other potential matches</h4>
+  <h4>Maybe try searching again?</h4>
+<% elsif @alternatives == 1 %>
+  <h4>There was <%= @alternatives %> other potential match</h4>
   <h4>Maybe try searching again?</h4>
 <% end %>
 
