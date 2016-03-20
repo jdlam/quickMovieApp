@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   require 'json'
   require 'byebug'
 
-  # Search
+  # Search for movies from OMDb API
 
   get '/fetch' do
     unless params[:title].blank? || (!params[:type].blank? && params[:type] != 'movie' &&  params[:type] != 'series' &&  params[:type] != 'episode')
